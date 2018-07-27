@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Faulknerbot</title>
+
+	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script type="text/javascript">
+			var jq311 = $.noConflict(true);
+		</script>
+		<link rel="stylesheet" href="static/css/normalize.css">
+		<link rel='stylesheet prefetch' href='/static/js/jquery.mCustomScrollbar.min.css'>
+		<link rel="stylesheet" href="static/css/style.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100" rel="stylesheet">
+		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-108644105-2"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-108644105-2');
+		</script>
+		<script>
+			$('#myModal').on('shown.bs.modal', function () {
+				$('#myInput').trigger('focus')
+			})
+		</script>
+		<!--Conversation Saver-->
+		<script>
+			(function(){
+				document.location = 
+					'data:text/attachment;base64,' +
+					utf8_to_b64(document.getElementsById('page_body').innerHTML);
+						//utf8_to_b64(document.documentElement.innerHTML); //To Download Entire Html Source
+			})();
+			
+			function utf8_to_b64( str ) {
+			  return window.btoa(unescape(encodeURIComponent( str )));
+			}
+			</script>
+	</head>
+	<body onload="init()" id="page_body">
+
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+					<a class="navbar-brand" href="/">
+							<img src="static/res/typewriter.png" width="30" height="30" class="d-inline-block align-top" alt="Faulknerbot Logo">
+						Faulknerbot</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					  <span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarNav">
+					  <ul class="navbar-nav">
+						<li class="nav-item active">
+						  <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item">
+						  <a class="nav-link" onclick="return confirm('By navigating away from this page, you will lose your current conversation.');" href="/about">About</a>
+						</li>
+						<li class="nav-item">
+						  <a class="nav-link" onclick="$(this).attr('href', 'data:text/plain;base64,' + utf8_to_b64($('html').clone().find('#generate').remove().end()[0].outerHTML));" download="index.html" id="generate" href="#">Save</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link"  href="mailto:mauro@psu.edu"><i class="far fa-envelope"></i></a>
+						</li>
+						<li class="nav-item">
+								<a class="nav-link"  href="https://twitter.com/onthename"><i class="fab fa-twitter"></i></a>
+						</li>
+						<li class="nav-item">
+								<a class="nav-link"  href="https://github.com/aaronmauro/"><i class="fab fa-github"></i></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link"  href="#" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-question"></i></a>
+						</li>
+					  </ul>
+					</div>
+				  </nav>
+
+	<div class="chat">
+			<div class="chat-title">
+				<h1>Faulknerbot</h1>
+				<h2>Ask Me Anything</h2>
+				<figure class="avatar">
+				<img src="static/res/botim.png"/></figure>
+			</div>
+		<div class="messages">
+			<div class="clickable">
+				<div id="save_box" class="messages-content"></div>
+			</div>
+		</div>
+
+		<div class="message-box">
+			<textarea type="text" class="message-input" placeholder="Type message..."></textarea>
+			<button type="submit" class="message-submit">Send</button>
+		</div>
+
+	</div>
+
+	<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">How to use</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Just chat, click the text box to search, click link, enjoy.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+		<script src="/static/js/jquery-latest.js"></script>
+		<script src='/static/js/jquery.min.js'></script>
+		<script src='/static/js/jquery.mCustomScrollbar.concat.min.js'></script>
+		<script src="static/js/index.js"></script>
+
+	</body>
+
+</html>
