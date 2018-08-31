@@ -12,7 +12,7 @@ if os.path.exists(BRAIN_FILE):
     k.loadBrain(BRAIN_FILE)
 
 else:
-    k.bootstrap(learnFiles="/var/www/FlaskApp/FlaskApp/data/std-startup.aiml", commands="load aiml b")
+    k.bootstrap(learnFiles="std-startup.aiml", commands="load aiml b")
     k.saveBrain(BRAIN_FILE)
 
 k.setBotPredicate('master','Dr. Aaron Mauro')
@@ -28,7 +28,7 @@ app = Flask(__name__)
 @app.route("/")
 def hello():
 	return render_template("index.html")
-@app.route("/about")
+@app.route("/about/")
 def about():
 	return render_template("about.html")
 
@@ -44,7 +44,8 @@ def reply():
                 response = k.respond(input_text)
             return jsonify( { 'text': response } )
     except Exception as e:
-        return jsonify( {'text': str(e) } ) #for debugging
+        return "Unexpected error"
+        #return jsonify( {'text': str(e) } ) #for debugging
 
 @app.route('/_searcher', methods=['POST'])
 def searcher():
@@ -53,7 +54,8 @@ def searcher():
         response = k.respond(input_text)
         return jsonify( { 'text': search(response) + link(response) } )
     except Exception as e:
-        return jsonify( {'text': str(e) } ) #for debugging
+        return "Unexpected error"
+        #return jsonify( {'text': str(e) } ) #for debugging
 
 if __name__ == "__main__":
     app.run()
